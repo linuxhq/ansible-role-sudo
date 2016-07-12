@@ -1,0 +1,6 @@
+---
+sudo_includedir: /etc/sudoers.d
+sudo_requiretty: True
+sudo_secure_path: [ '/sbin', '/bin', '/usr/sbin', '/usr/bin' ]
+sudo_visiblepw: False
+sudoers_d: []
