@@ -2,35 +2,35 @@
 ## 
 ## This file must be edited with the 'visudo' command.
 
-{% if sudoers_cmnd_aliases is defined %}
+{% if sudoers_cmnd_aliases|length > 0 %}
 ## Cmnd alias specification
 {%   for name, list in sudoers_cmnd_aliases.iteritems()|sort %}
 Cmnd_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
-{% if sudoers_host_aliases is defined %}
+{% if sudoers_host_aliases|length > 0 %}
 ## Host alias specification
 {%   for name, list in sudoers_host_aliases.iteritems()|sort %}
 Host_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
-{% if sudoers_runas_aliases is defined %}
+{% if sudoers_runas_aliases|length > 0 %}
 ## Runas alias specification
 {%   for name, list in sudoers_runas_aliases.iteritems()|sort %}
 Runas_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
-{% if sudoers_user_aliases is defined %}
+{% if sudoers_user_aliases|length > 0 %}
 ## User alias specification
 {%   for name, list in sudoers_user_aliases.iteritems()|sort %}
 User_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
-{% if sudoers_defaults is defined %}
+{% if sudoers_defaults|length > 0 %}
 ## Defaults specification
 {%   for parameter, value in sudoers_defaults.iteritems()|sort %}
 {%     if value is sameas true %}
@@ -43,7 +43,7 @@ Defaults	{{ parameter }} = "{{ value }}"
 {%   endfor %}
 
 {% endif %}
-{% if sudoers_privileges is defined %}
+{% if sudoers_privileges|length > 0 %}
 ## User privilege specification
 {%   for privilege in sudoers_privileges %}
 {{ privilege.ugid }}	{{ privilege.host }} = ({{ privilege.runas }})	{{ privilege.command }}

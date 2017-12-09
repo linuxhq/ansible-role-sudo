@@ -19,7 +19,7 @@
     - name: Applying sudoers.d configurations
       template:
         src: sudoers_d.j2
-        dest: /etc/sudoers.d/{{ item.file }}
+        dest: "/etc/sudoers.d/{{ item.file }}"
         owner: root
         group: root
         mode: 0440
@@ -27,8 +27,6 @@
       when:
         - item.command is defined
         - item.file is defined
-        - item.host is defined
-        - item.runas is defined
         - item.ugid is defined
   tags: sudo
   become: true

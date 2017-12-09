@@ -1,3 +1,5 @@
 {% for command in item.commands %}
-{{ item.user }}		ALL=NOPASSWD:{{ command }}
+{%   set host = item.host if item.host is defined else 'ALL' %}
+{%   set runas = item.runas if item.runas is defined else 'ALL' %}
+{{ item.ugid }}		{{ host }} = ({{ runas }})	NOPASSWD: {{ command }}
 {% endfor %}
