@@ -52,7 +52,7 @@ None
             - file: tkimball
               host: ALL
               runas: ALL
-              user: tkimball
+              ugid: tkimball
               commands:
                 - 'certbot --renew'
                 - 'systemctl restart ngircd.service'
