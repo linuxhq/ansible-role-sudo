@@ -50,8 +50,8 @@ None
               - /sbin/service
           sudoers_d:
             - file: tkimball
-              host: all
-              runas: all
+              host: ALL
+              runas: ALL
               user: tkimball
               commands:
                 - 'certbot --renew'
