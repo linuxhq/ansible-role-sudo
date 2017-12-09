@@ -49,6 +49,6 @@ Defaults	{{ parameter }} = "{{ value }}"
 {{ privilege.ugid }}	{{ privilege.host }} = ({{ privilege.runas }})	{{ privilege.command }}
 {%   endfor %}
 
-{% endif %}  
+{% endif -%}  
 ## Read drop-in files from /etc/sudoers.d
 #includedir {{ sudoers_includedir }}
