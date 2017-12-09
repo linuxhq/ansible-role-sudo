@@ -46,7 +46,7 @@ Defaults	{{ parameter }} = "{{ value }}"
 {% if sudoers_privileges is defined %}
 ## User privilege specification
 {%   for privilege in sudoers_privileges %}
-{{ sudoers_privileges.ugid }}	{{ sudoers_privileges.host }} = ({{ sudoers_privileges.runas }})	{{ sudoers_privileges.command }}
+{{ privilege.ugid }}	{{ privilege.host }} = ({{ privilege.runas }})	{{ privilege.command }}
 {%   endfor %}
 
 {% endif %}  
