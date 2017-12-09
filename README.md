@@ -28,7 +28,7 @@ Available variables are listed below, along with default values:
         host: ALL
         runas: ALL
         command: ALL
-      - ugid: %wheel
+      - ugid: '%wheel'
         host: ALL
         runas: ALL
         command: ALL
