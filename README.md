@@ -12,11 +12,28 @@ None
 
 Available variables are listed below, along with default values:
 
-    sudo_includedir: /etc/sudoers.d
-    sudo_requiretty: True
-    sudo_secure_path: [ '/sbin', '/bin', '/usr/sbin', '/usr/bin' ]
-    sudo_visiblepw: False
+    sudoers_cmnd_aliases: {}
     sudoers_d: []
+    sudoers_defaults:
+      always_set_home: True
+      env_reset: True
+      match_group_by_gid: True
+      requiretty: True
+      secure_path: "/sbin:/bin:/usr/sbin:/usr/bin"
+      visiblepw: False
+    sudoers_host_aliases: {}
+    sudoers_includedir: /etc/sudoers.d
+    sudoers_privileges:
+      - ugid: root
+        host: ALL
+        runas: ALL
+        command: ALL
+      - ugid: %wheel
+        host: ALL
+        runas: ALL
+        command: ALL
+    sudoers_runas_aliases: {}
+    sudoers_user_aliases: {}
 
 You can define individual sudoers.d files using the following variable:
 
@@ -25,18 +42,6 @@ You can define individual sudoers.d files using the following variable:
         user: tkimball
         commands:
           - /bin/su *
-
-Additional variables available, not set by default:
-
-    sudo_env_keep: [ 'GECOS', 'SSH_AUTH_SOCK' ]
-    sudo_cmnd_alias:
-      SERVICES: [ '/sbin/service', '/sbin/chkconfig' ]
-    sudo_host_alias:
-      FILESERVERS: [ 'fs1', 'fs2' ]
-      MAILSERVERS: [ 'smtp', 'smtp2' ]
-    sudo_user_alias:
-      ADMINS: [ 'jsmith', 'mikem' ]
-    sudo_wheel_nopasswd: False
 
 ## Dependencies
 
@@ -47,19 +52,31 @@ None
     - hosts: servers
       roles:
         - role: linuxhq.sudo
-          sudo_env_keep: [ 'SSH_AUTH_SOCK' ]
-          sudo_cmnd_alias:
-            ansible: [ '/usr/bin/ansible', '/usr/bin/ansible-playbook' ]
-          sudo_wheel_nopasswd: True
+          sudoers_cmnd_aliases:
+            services:
+              - /sbin/chkconfig
+              - /sbin/service
           sudoers_d:
             - file: tkimball
               user: tkimball
               commands:
                 - /bin/su *
+          sudoers_host_aliases:
+            fileservers:
+              - fs1
+              - fs2 
+          sudoers_runas_aliases:
+            appusers:
+              - app1
+              - app2
+          sudoers_user_aliases:
+            admins:
+              - jsmith
+              - mikem
 
 ## License
 
-BSD
+GPLv3
 
 ## Author Information
 

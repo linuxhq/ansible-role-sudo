@@ -1,28 +1,34 @@
 ---
-- name: Install sudo package
+- name: Ensure that the sudo package is installed
   tags: sudo
-  yum: name=sudo
-       state=present
-       update_cache=yes
+  become: true
+  yum:
+    name: sudo
+    state: present
   register: sudo_yum
 
 - block:
-    - name: Configure sudoers
-      template: src=sudoers.j2
-                dest=/etc/sudoers
-                owner=root
-                group=root
-                mode=0440
-    - name: Configure sudoers.d
-      template: src=sudoers.d.j2
-                dest=/etc/sudoers.d/{{ item.file }}
-                owner=root
-                group=root
-                mode=0440
+    - name: Applying sudoers configurations
+      template:
+        src: sudoers.j2
+        dest: /etc/sudoers
+        owner: root
+        group: root
+        mode: 0440
+
+    - name: Applying sudoers.d configurations
+      template:
+        src: sudoers_d.j2
+        dest: /etc/sudoers.d/{{ item.file }}
+        owner: root
+        group: root
+        mode: 0440
       with_items: "{{ sudoers_d }}"
       when:
         - item.file is defined
         - item.user is defined
         - item.commands is defined
   tags: sudo
+  become: true
   when: sudo_yum|success
+...
