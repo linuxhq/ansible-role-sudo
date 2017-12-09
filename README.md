@@ -35,14 +35,6 @@ Available variables are listed below, along with default values:
     sudoers_runas_aliases: {}
     sudoers_user_aliases: {}
 
-You can define individual sudoers.d files using the following variable:
-
-    sudoers_d:
-      - file: tkimball
-        user: tkimball
-        commands:
-          - /bin/su *
-
 ## Dependencies
 
 None
@@ -58,9 +50,12 @@ None
               - /sbin/service
           sudoers_d:
             - file: tkimball
+              host: all
+              runas: all
               user: tkimball
               commands:
-                - /bin/su *
+                - 'certbot --renew'
+                - 'systemctl restart ngircd.service'
           sudoers_host_aliases:
             fileservers:
               - fs1
