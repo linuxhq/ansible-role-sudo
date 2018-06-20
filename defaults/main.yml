@@ -2,12 +2,12 @@
 sudoers_cmnd_aliases: {}
 sudoers_d: []
 sudoers_defaults:
-  always_set_home: True
-  env_reset: True
-  match_group_by_gid: True
-  requiretty: True
+  always_set_home: true
+  env_reset: true
+  match_group_by_gid: true
+  requiretty: true
   secure_path: "/sbin:/bin:/usr/sbin:/usr/bin"
-  visiblepw: False
+  visiblepw: false
 sudoers_host_aliases: {}
 sudoers_includedir: /etc/sudoers.d
 sudoers_privileges:
