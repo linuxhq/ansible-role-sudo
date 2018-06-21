@@ -4,7 +4,7 @@
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-sudo-blue.svg?style=flat)](https://galaxy.ansible.com/linuxhq/sudo)
 [![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat)](COPYING)
 
-RHEL/CentOS - Execute a command as another user
+Linux - Execute a command as another user
 
 ## Requirements
 

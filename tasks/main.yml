@@ -2,10 +2,10 @@
 - name: Ensure that the sudo package is installed
   tags: sudo
   become: true
-  yum:
+  package:
     name: sudo
     state: present
-  register: sudo_yum
+  register: sudo_package
 
 - name: Attempting to overlay sudoers configurations
   tags: sudo
@@ -16,7 +16,7 @@
     owner: root
     group: root
     mode: 0440
-  when: sudo_yum is success
+  when: sudo_package is success
 
 - name: Attempting to overlay sudoers.d configurations, if applicable
   tags: sudo
@@ -32,5 +32,5 @@
     - item.commands is defined
     - item.file is defined
     - item.ugid is defined
-    - sudo_yum is success
+    - sudo_package is success
 ...
