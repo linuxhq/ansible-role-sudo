@@ -16,7 +16,7 @@
     owner: root
     group: root
     mode: 0440
-  validate: '/usr/sbin/visudo -cf %s'
+    validate: '/usr/sbin/visudo -cf %s'
   when: sudo_package is success
 
 - name: Attempting to overlay sudoers.d configurations, if applicable
@@ -28,7 +28,7 @@
     owner: root
     group: root
     mode: 0440
-  validate: '/usr/sbin/visudo -cf %s'
+    validate: '/usr/sbin/visudo -cf %s'
   with_items: "{{ sudoers_d }}"
   when:
     - item.commands is defined
