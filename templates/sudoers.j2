@@ -4,35 +4,35 @@
 
 {% if sudoers_cmnd_aliases|length > 0 %}
 ## Cmnd alias specification
-{%   for name, list in sudoers_cmnd_aliases.iteritems()|sort %}
+{%   for name, list in sudoers_cmnd_aliases.items()|sort %}
 Cmnd_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
 {% if sudoers_host_aliases|length > 0 %}
 ## Host alias specification
-{%   for name, list in sudoers_host_aliases.iteritems()|sort %}
+{%   for name, list in sudoers_host_aliases.items()|sort %}
 Host_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
 {% if sudoers_runas_aliases|length > 0 %}
 ## Runas alias specification
-{%   for name, list in sudoers_runas_aliases.iteritems()|sort %}
+{%   for name, list in sudoers_runas_aliases.items()|sort %}
 Runas_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
 {% if sudoers_user_aliases|length > 0 %}
 ## User alias specification
-{%   for name, list in sudoers_user_aliases.iteritems()|sort %}
+{%   for name, list in sudoers_user_aliases.items()|sort %}
 User_Alias	{{ name|upper }} = {{ list|join(', ') }}
 {%   endfor %}
 
 {% endif %}
 {% if sudoers_defaults|length > 0 %}
 ## Defaults specification
-{%   for parameter, value in sudoers_defaults.iteritems()|sort %}
+{%   for parameter, value in sudoers_defaults.items()|sort %}
 {%     if value is sameas true %}
 Defaults	{{ parameter }}
 {%     elif value is sameas false %}
