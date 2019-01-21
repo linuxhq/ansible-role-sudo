@@ -5,7 +5,6 @@
   package:
     name: sudo
     state: present
-  register: sudo_package
 
 - name: Attempting to overlay sudoers configurations
   tags: sudo
@@ -17,22 +16,22 @@
     group: root
     mode: 0440
     validate: '/usr/sbin/visudo -cf %s'
-  when: sudo_package is success
 
 - name: Attempting to overlay sudoers.d configurations, if applicable
   tags: sudo
   become: true
   template:
     src: sudoers_d.j2
-    dest: "/etc/sudoers.d/{{ item.file }}"
+    dest: "{{ '/etc/sudoers.d/' + item.file }}"
     owner: root
     group: root
     mode: 0440
     validate: '/usr/sbin/visudo -cf %s'
-  with_items: "{{ sudoers_d }}"
+  loop: "{{ sudoers_d }}"
+  loop_control:
+    label: "{{ item.file }}"
   when:
     - item.commands is defined
     - item.file is defined
     - item.ugid is defined
-    - sudo_package is success
 ...
